@@ -48,7 +48,7 @@
 //        }
         
         UINavigationItem *navItem = self.navigationItem;
-        navItem.title = @"Homepwner";
+        navItem.title = @"Tasks";
     }
     
     return self;
