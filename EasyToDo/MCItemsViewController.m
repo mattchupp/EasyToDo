@@ -13,7 +13,7 @@
 
 @interface MCItemsViewController ()
 
-@property (nonatomic, strong) IBOutlet UIView *headerView;
+
 
 @end
 
@@ -88,9 +88,6 @@
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
     
-    // set the header of the table to be headerView.xib for the buttons
-    UIView *header = self.headerView;
-    [self.tableView setTableHeaderView:header];
 }
 
 #pragma mark -Buttons
