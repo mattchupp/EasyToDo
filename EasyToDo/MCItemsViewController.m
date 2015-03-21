@@ -15,26 +15,12 @@
 
 @property (nonatomic, strong) IBOutlet UIView *headerView;
 
-
-
 @end
 
 
 @implementation MCItemsViewController
 
 #pragma mark -Setup
-
-// load the headerView.xib file
-- (UIView *)headerView {
-    
-    if (!_headerView) {
-        
-        // load HeaderView.xib
-        [[NSBundle mainBundle] loadNibNamed:@"HeaderView" owner:self options:nil];
-    }
-    
-    return _headerView;
-}
 
 
 - (instancetype)init {
@@ -43,12 +29,23 @@
     self = [super initWithStyle:UITableViewStylePlain];
     
     if (self) {
-//        for (int i = 0; i < 5; i++) {
-//            [[MCItemStore sharedStore] createItem];
-//        }
         
         UINavigationItem *navItem = self.navigationItem;
         navItem.title = @"Tasks";
+        
+        // create a new bar button item that sends
+        // addNewItem: to MCItemsViewController
+        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc]
+                                           initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                           target:self
+                                           action:@selector(addNewItem:)];
+        
+        // set this bar button as the right item in the navigationItem
+        navItem.rightBarButtonItem = rightBarButton;
+        
+        // set the left bar button to be the right item in the navigationItem
+        navItem.leftBarButtonItem = self.editButtonItem;
+        
     }
     
     return self;
@@ -119,26 +116,6 @@
     
 }
 
-- (IBAction)toggleEditingMode:(id)sender {
-    
-    // if you are currently in editing mode...
-    if (self.isEditing) {
-        
-        // change text of button to inform user of state
-        [sender setTitle:@"Edit" forState:UIControlStateNormal];
-        
-        // turn of editing mode
-        [self setEditing:NO animated:YES];
-    } else {
-        
-        // change text of button to inform user of state
-        [sender setTitle:@"Done" forState:UIControlStateNormal];
-        
-        // Enter editing mode
-        [self setEditing:YES animated:YES];
-    }
-    
-}
 
 - (void)tableView:(UITableView *)tableView
 commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
